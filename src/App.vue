@@ -17,8 +17,24 @@ export default {
   data() {
     return {
       retrievedVerses: {
-        english: ['It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'],
-        indo: ['Itu bertahan tidak hanya lima abad, tetapi juga lompatan ke pengaturan huruf elektronik, yang pada dasarnya tidak berubah. Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.', 'Sudah menjadi fakta lama bahwa pembaca akan terganggu oleh konten halaman yang dapat dibaca saat melihat tata letaknya.']
+        english: ['It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+          , 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'],
+        indo: ['Itu bertahan tidak hanya lima abad, tetapi juga lompatan ke pengaturan huruf elektronik, yang pada dasarnya tidak berubah.'
+          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
+          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
+          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
+          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
+          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
+          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
+          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
+          , 'Sudah menjadi fakta lama bahwa pembaca akan terganggu oleh konten halaman yang dapat dibaca saat melihat tata letaknya.']
       }
     }
   },
@@ -51,14 +67,11 @@ export default {
 
 <style>
   .app {
-  min-height: 100vh;
-  background-color: #F9F7F7;
-  display: flex;
-  justify-content: center;
-  }
-
-  p {
-    color: #3F72AF
+    min-height: 100vh;
+    background-color: #E9E8DE;
+    display: flex;
+    justify-content: center;
+    color: #333;
   }
 
   /* .max-w-screen {

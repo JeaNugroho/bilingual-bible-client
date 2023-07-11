@@ -1,10 +1,10 @@
 <template>
     <div class="columns-2 py-1">
-        <div class="px-10">
-            <p class="text-lg font-semibold">{{ verse.english }}</p>
+        <div class="px-12 content-start">
+            <p>{{ verse.english }}</p>
         </div>
-        <div class="px-10">
-            <p class="text-lg">{{ verse.indo }}</p>
+        <div class="px-12 content-start">
+            <p>{{ verse.indo }}</p>
         </div>
     </div>
 </template>
@@ -16,4 +16,8 @@ export default {
 </script>
 
 <style>
+p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.1em;
+  }
 </style>
