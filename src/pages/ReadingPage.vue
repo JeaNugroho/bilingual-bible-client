@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="py-20">
         <bilingual-item v-for="verse in verses" :key="verse" :verse="verse"></bilingual-item>
     </div>
 </template>
@@ -15,4 +15,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>
