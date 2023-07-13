@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 p {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.1em;
