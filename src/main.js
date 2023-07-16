@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import PrimeVue from 'primevue/config'
 // import { Icon } from 'primevue/icons'
-import 'primevue/resources/themes/viva-light/theme.css'
+import 'primevue/resources/themes/mira/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
