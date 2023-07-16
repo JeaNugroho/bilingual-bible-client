@@ -1,9 +1,9 @@
 <template>
-    <div class="columns-2 py-1">
-        <div class="px-12 content-start">
+    <div class="grid">
+        <div class="col py-0 line-height-3">
             <p>{{ verse.english }}</p>
         </div>
-        <div class="px-12 content-start">
+        <div class="col py-0 line-height-3">
             <p>{{ verse.indo }}</p>
         </div>
     </div>
