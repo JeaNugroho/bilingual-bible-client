@@ -1,34 +1,64 @@
 <template>
-    <!-- <div class="card relative z-2 pb-2 border-bottom-1"> -->
-    <div class="card navbar">
         <!-- <Menubar :model="items" /> -->
-        <Menubar>
+        <Menubar class="navbar">
             <template #start>
                 <i class="pi pi-book ml-2 pr-1"></i>
-                <p>{{ 'Bilingual Bible' }}</p>
+                <p>{{ navbarTitle }}</p>
             </template>
             <template #end>
                 <prime-vue-button icon="pi pi-search" @click="isSearchModalVisible = true" />
                 <Dialog v-model:visible="isSearchModalVisible" modal header="Search directory" :style="{ width: '50vw' }">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <!-- Search form begins here -->
+                    <Dropdown v-model="selectedBook" :options="books" filter optionLabel="name" placeholder="Select a Book" class="w-full md:w-14rem mr-3 mt-2">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value" class="flex align-items-center">
+                                <img :alt="slotProps.value.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" style="width: 18px" />
+                                <div>{{ slotProps.value.name }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>
+                        </template>
+                        <template #option="slotProps">
+                            <div class="flex align-items-center">
+                                <img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" style="width: 18px" />
+                                <div>{{ slotProps.option.name }}</div>
+                            </div>
+                        </template>
+                    </Dropdown>
+
+                    <Dropdown v-model="selectedChapter" :options="chapters" :disabled="!selectedBook" filter optionLabel="name" placeholder="Select a Chapter" class="w-full md:w-14rem mr-3 mt-2">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value" class="flex align-items-center">
+                                <img :alt="slotProps.value.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" style="width: 18px" />
+                                <div>{{ slotProps.value.name }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>
+                        </template>
+                        <template #option="slotProps">
+                            <div class="flex align-items-center">
+                                <img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" style="width: 18px" />
+                                <div>{{ slotProps.option.name }}</div>
+                            </div>
+                        </template>
+                    </Dropdown>
+                    <!-- Search form ends here -->
                     <template #footer>
                         <prime-vue-button label="Cancel" icon="pi pi-times" @click="isSearchModalVisible = false" text />
-                        <prime-vue-button label="Search" icon="pi pi-search" @click="isSearchModalVisible = false" autofocus />
+                        <prime-vue-button label="Search" icon="pi pi-search" @click="onSearchClick" autofocus />
                     </template>
                 </Dialog>
-                <prime-vue-button class="ml-2" icon="pi pi-envelope" />
             </template>
         </Menubar>
-        
-    </div>
 </template>
 
 <script>
 import Menubar from 'primevue/menubar'
-import Dialog from 'primevue/dialog';
+import Dialog from 'primevue/dialog'
+import Dropdown from 'primevue/dropdown'
+import { ESV_BOOKS, TB_BOOKS, MAX_CHAPTERS } from '../constants'
 
 export default {
     data() {
@@ -39,12 +69,50 @@ export default {
                     label: 'Yo Bible =)',
                     icon: 'pi pi-fw pi-book'
                 }
-            ]
+            ],
+            selectedBook: null,
+            books: [],
+            selectedChapter: null,
+            chapters: [],
         }
     },
     components: {
         Menubar,
-        Dialog
+        Dialog,
+        Dropdown
+    },
+    created() {
+        this.prepareBooksOption()
+    },
+    methods: {
+        onSearchClick() {
+            this.isSearchModalVisible = false
+            this.$emit('searchEvent', { selectedEsvBook: ESV_BOOKS[this.selectedBook.id], selectedTbBook: TB_BOOKS[this.selectedBook.id], selectedChapter: parseInt(this.selectedChapter.name) })
+        },
+        prepareBooksOption() {
+            const bilingualBooks = []
+            for (let i in ESV_BOOKS) {
+                const bilingualBook = {
+                    id: i,
+                    name: `${ESV_BOOKS[i]} / ${TB_BOOKS[i]}`
+                }
+                bilingualBooks.push(bilingualBook)
+            }
+            this.books = bilingualBooks
+        }
+    },
+    props: ['navbarTitle'],
+    watch: {
+        selectedBook({ id: selectedBookId }) {
+            this.selectedChapter = null
+
+            const chapters = []
+            for (let i = 0; i < MAX_CHAPTERS[selectedBookId]; i++) {
+                chapters.push({ name: (i + 1).toString() })
+            }
+
+            this.chapters = chapters
+        },
     }
 }
 </script>

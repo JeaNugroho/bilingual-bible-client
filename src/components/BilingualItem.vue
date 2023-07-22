@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 p {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Inter', sans-serif;
     font-size: 1.1em;
   }
 </style>
