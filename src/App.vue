@@ -1,8 +1,8 @@
 <template>
   <div v-scroll-lock class="app">
-    <nav-bar></nav-bar>
+    <nav-bar @searchEvent="onSearch" :navbarTitle="navbarTitle"></nav-bar>
     <div class="main-area">
-      <reading-page :verses="verses"></reading-page>
+      <reading-page :isLoading="isLoading" :verses="verses"></reading-page>
     </div>
     
     <!-- <footer-panel></footer-panel> -->
@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue';
+import axios from 'axios'
+import NavBar from './components/NavBar.vue'
 import ReadingPage from './pages/ReadingPage.vue'
-// import FooterPanel from './components/FooterPanel.vue';
 
 export default {
   name: 'App',
@@ -24,39 +24,11 @@ export default {
   data() {
     return {
       retrievedVerses: {
-        english: ['It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          , 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'],
-        indo: ['Itu bertahan tidak hanya lima abad, tetapi juga lompatan ke pengaturan huruf elektronik, yang pada dasarnya tidak berubah.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Itu dipopulerkan pada 1960-an dengan dirilisnya lembaran Letraset yang berisi bagian-bagian Lorem Ipsum, dan baru-baru ini dengan perangkat lunak desktop publishing seperti Aldus PageMaker termasuk versi Lorem Ipsum.'
-          , 'Sudah menjadi fakta lama bahwa pembaca akan terganggu oleh konten halaman yang dapat dibaca saat melihat tata letaknya.']
-      }
+        english: [],
+        indo: []
+      },
+      isLoading: false,
+      navbarTitle: 'Bilingual Bible'
     }
   },
   computed: {
@@ -81,6 +53,26 @@ export default {
       }
 
       return result;
+    }
+  },
+  methods: {
+    async onSearch({ selectedEsvBook, selectedTbBook, selectedChapter }) {
+      this.isLoading = true
+
+      const baseUrl = 'http://localhost:5000'
+      const completeUrl = `${baseUrl}/book/${selectedEsvBook}/chapter/${selectedChapter}`
+      console.log(completeUrl)
+      try {
+        const response = await axios.get(completeUrl)
+
+        this.retrievedVerses.english = response.data.data.esv
+        this.retrievedVerses.indo = response.data.data.tb
+        this.navbarTitle = `${selectedEsvBook} ${selectedChapter} / ${selectedTbBook} ${selectedChapter}`
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      } finally {
+        this.isLoading = false
+      }
     }
   }
 }
